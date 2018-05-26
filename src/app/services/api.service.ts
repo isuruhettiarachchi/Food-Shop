@@ -8,6 +8,7 @@ const serverAddress = 'http://localhost:3000';
 })
 export class ApiService {
   foodListEndPoint: String = '/api/foods';
+  paymentEntPoint: String = '/api/payments';
 
   constructor(
     private http: HttpClient
@@ -28,10 +29,42 @@ export class ApiService {
     });
   }
 
+  public submitPay(payload): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.post(serverAddress + this.paymentEntPoint, payload).then((res) => {
+        resolve(res);
+      }).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
   // get method
   private get(url): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(url, {
+        observe: 'response',
+        headers: new HttpHeaders({
+          'Accept': 'application/json',
+          'Content-Type': 'Application/json'
+        })
+      })
+      .subscribe(
+        response => {
+          console.log(response);
+          resolve(response);
+        },
+        error => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  }
+
+  private post(url, payload): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(url, payload, {
         observe: 'response',
         headers: new HttpHeaders({
           'Accept': 'application/json',

@@ -2,8 +2,12 @@
     <li class="nav-item">
         <a [routerLink]="['cart']" class="nav-link active">Cart</a>
     </li>
-    <li class="nav-item">
-        <a [routerLink]="['/cart-view/payment']" class="nav-link">Pay</a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pay</a>
+        <div class="dropdown-menu">
+            <a [routerLink]="['/cart-view/mobilepayment']" class="dropdown-item">Pay From Mobile</a>
+            <a [routerLink]="['/cart-view/cardpayment']" class="dropdown-item">Pay From Card</a>
+        </div>
     </li>
     <!-- <li class="nav-item">
         <a class="nav-link" href="#">Link</a>

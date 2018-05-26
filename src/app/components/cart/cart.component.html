@@ -1,15 +1,6 @@
 <div>
   <h4>Your Cart</h4>
   <p>Number of products in the cart <span>{{cartService.products.length}}</span></p>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let item of cartService.products">{{item.product.name}}</li>
-  </ul>
-  <!-- <div *ngFor="let item of cartService.products">
-    <p>{{item.product.name}}</p>
-    <p>{{item.quantity}}</p>
-    <label>{{item.quantity*item.product.parsedPrice}}</label>
-  </div> -->
-  <label>{{cartService.cartTotal}}</label>
 </div>
 
 <table class="table">

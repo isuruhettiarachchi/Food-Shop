@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MobilePayment } from '../../shared/mobile-payment.model';
+import { Payment } from '../../shared/payment.model';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -10,7 +11,6 @@ import { CartService } from '../../services/cart.service';
 export class MobilePaymentComponent implements OnInit {
 
   output;
-  amount;
   model;
 
   constructor(private cartService: CartService) {
@@ -21,7 +21,8 @@ export class MobilePaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    this.output = JSON.stringify(this.model);
+    this.output = new Payment(JSON.stringify(this.cartService.products), JSON.stringify(this.model));
+    this.cartService.flushCart();
     console.log(this.output);
   }
 

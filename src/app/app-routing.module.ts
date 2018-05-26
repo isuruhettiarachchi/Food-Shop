@@ -16,7 +16,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'cart', pathMatch: 'full' },
       { path: 'cart', component: CartComponent },
-      { path: 'payment', component: PaymentComponent }
+      { path: 'cardpayment', component: CardPaymentComponent },
+      { path: 'mobilepayment', component: MobilePaymentComponent }
     ]
   }
 ];
