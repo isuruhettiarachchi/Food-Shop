@@ -1,0 +1,43 @@
+<div>
+  <h4>Your Cart</h4>
+  <p>Number of products in the cart <span>{{cartService.products.length}}</span></p>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of cartService.products">{{item.product.name}}</li>
+  </ul>
+  <!-- <div *ngFor="let item of cartService.products">
+    <p>{{item.product.name}}</p>
+    <p>{{item.quantity}}</p>
+    <label>{{item.quantity*item.product.parsedPrice}}</label>
+  </div> -->
+  <label>{{cartService.cartTotal}}</label>
+</div>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Qty</th>
+      <th scope="col">Amount</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cartService.products; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{item.product.name}}</td>
+      <td>{{item.product.price}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.quantity * item.product.price}}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm" (click)="deleteProduct(item.product)">Delete</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">Total Amount</td>
+      <td>{{cartService.cartTotal}}</td>
+    </tr>
+  </tbody>
+</table>
+  
