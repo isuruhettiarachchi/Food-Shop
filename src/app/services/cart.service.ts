@@ -23,7 +23,7 @@ export class CartService {
     this.cartTotal += parsedPrice;
     // Search this product on the cart and increment the quantity
     this.products = this.products.map(_product => {
-      if (_product.product.id === product.id) {
+      if (_product.product._id === product._id) {
         _product.quantity++;
         exists = true;
       }
@@ -43,7 +43,7 @@ export class CartService {
 
   deleteProductFromCart(product) {
     this.products = this.products.filter(_product => {
-      if (_product.product.id === product.id) {
+      if (_product.product._id === product._id) {
         this.cartTotal -= _product.product.parsedPrice * _product.quantity;
         return false;
       }

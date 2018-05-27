@@ -1,7 +1,7 @@
 export class Product {
-    id: String;
+    _id: String;
     name: String;
     price: String;
     description: String;
-    img: String;
+    img_url: String;
 }

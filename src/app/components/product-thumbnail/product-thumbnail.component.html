@@ -1,11 +1,10 @@
-<div class="wrapper">
-  <div class="img-wrapper">
-    <img class="img" [src]="product.img">
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" [src]="product.img_url" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <p class="card-text">{{product.price}}</p>
+      <button type="button" class="btn btn-primary" (click)="onAddToCart()">Add To Cart</button>
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
   </div>
-  <div class="detail-wrapper">
-    <h4 class="title">{{product.name}}</h4>
-    <p class="description">{{product.description}}</p>
-    <label class="price">{{product.price}}</label>
-  </div>
-  <button class="add-to-cart" (click)="onAddToCart()">Add To Cart</button>
-</div>

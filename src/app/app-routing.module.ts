@@ -8,10 +8,12 @@ import { CartViewComponent } from './components/cart-view/cart-view.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { MobilePaymentComponent } from './components/mobile-payment/mobile-payment.component';
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: ShowcaseComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'cart-view', component: CartViewComponent,
     children: [
       { path: '', redirectTo: 'cart', pathMatch: 'full' },

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../shared/product.model';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-showcase',
@@ -8,16 +9,9 @@ import { Product } from '../../shared/product.model';
 })
 export class ShowcaseComponent implements OnInit {
   // @Input() products: Product[];
-  products: Product[] = [];
 
-  constructor() {
-    this.products.push({
-      id: 'id',
-      name: 'name',
-      price: '100.00',
-      description: 'some description',
-      img: 'http://qnimate.com/wp-content/uploads/2014/03/images2.jpg'
-    });
+  constructor(private productService: ProductService) {
+
   }
 
   ngOnInit() {

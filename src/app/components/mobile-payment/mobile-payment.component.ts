@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MobilePayment } from '../../shared/mobile-payment.model';
 import { Payment } from '../../shared/payment.model';
 import { CartService } from '../../services/cart.service';
+import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mobile-payment',
@@ -13,7 +15,7 @@ export class MobilePaymentComponent implements OnInit {
   output;
   model;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private apiService: ApiService, private router: Router) {
     this.model = new MobilePayment('mobile', null, null, this.cartService.cartTotal);
   }
 
@@ -21,9 +23,12 @@ export class MobilePaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    this.output = new Payment(JSON.stringify(this.cartService.products), JSON.stringify(this.model));
-    this.cartService.flushCart();
-    console.log(this.output);
+    this.output = new Payment(this.cartService.products, this.model);
+    this.apiService.submitPay(JSON.stringify(this.output)).then((res) => {
+      console.log(res);
+      this.cartService.flushCart();
+      this.router.navigateByUrl('/home');
+    });
   }
 
 }

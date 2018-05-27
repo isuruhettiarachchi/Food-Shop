@@ -1,0 +1,45 @@
+<!-- <form [formGroup]="form">
+  <fieldset>
+      <legend>Login</legend>
+      <div class="form-field">
+          <label>Email:</label>
+          <input name="email" formControlName="email">
+      </div>
+      <div class="form-field">
+          <label>Password:</label>
+          <input name="password" formControlName="password" 
+                 type="password">
+      </div>
+  </fieldset>
+  <div class="form-buttons">
+      <button class="button button-primary" 
+              (click)="login()">Login</button>
+  </div>
+</form> -->
+
+<div>
+  <h2>Login</h2>
+  <form (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="cardNumber">Email</label>
+      <input type="text"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        [(ngModel)]="userModel.email">
+    </div>
+    <div class="form-group">
+      <label for="CVC">CVC</label>
+      <input type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        required
+        [(ngModel)]="userModel.password">
+    </div>
+    <div>
+      <button type="submit" class="btn btn-default">Login</button>
+    </div>
+  </form>
+</div>

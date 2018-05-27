@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ProductThumbnailComponent } from './components/product-thumbnail/product-thumbnail.component';
@@ -12,6 +14,8 @@ import { MobilePaymentComponent } from './components/mobile-payment/mobile-payme
 import { CardPaymentComponent } from './components/card-payment/card-payment.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
+import { LoginComponent } from './components/login/login.component';
+import { Properties } from './shared/properties';
 
 @NgModule({
   declarations: [
@@ -23,14 +27,19 @@ import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-pa
     MobilePaymentComponent,
     CardPaymentComponent,
     PaymentComponent,
-    ConfirmPaymentComponent
+    ConfirmPaymentComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    Properties
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

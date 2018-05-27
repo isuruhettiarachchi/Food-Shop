@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
+import { Properties } from '../shared/properties';
 
 const serverAddress = 'http://localhost:3000';
 
@@ -9,13 +11,16 @@ const serverAddress = 'http://localhost:3000';
 export class ApiService {
   foodListEndPoint: String = '/api/foods';
   paymentEntPoint: String = '/api/payments';
+  signinEndPoint: String = '/api/users/signin';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private properties: Properties
   ) { }
 
   // get food list from server
   public getFoodList(): Promise<any> {
+    console.log('getfoodlist');
     return new Promise((resolve, reject) => {
       this.get(serverAddress + this.foodListEndPoint).then(res => {
         console.log('res', res);
@@ -31,9 +36,22 @@ export class ApiService {
 
   public submitPay(payload): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.post(serverAddress + this.paymentEntPoint, payload).then((res) => {
+      this.psot_verify(serverAddress + this.paymentEntPoint, payload, this.properties.token).then((res) => {
+        console.log(res);
         resolve(res);
       }).catch(err => {
+        console.log(err);
+        reject(err);
+      });
+    });
+  }
+
+
+  public login(payload): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.post_login(serverAddress + this.signinEndPoint, payload).then((res) => {
+        resolve(res);
+      }).catch((err) => {
         reject(err);
       });
     });
@@ -62,13 +80,37 @@ export class ApiService {
     });
   }
 
-  private post(url, payload): Promise<any> {
+  private post_login(url, payload): Promise<any> {
+    console.log('post method ', payload, ' url ', url);
     return new Promise((resolve, reject) => {
       this.http.post(url, payload, {
         observe: 'response',
         headers: new HttpHeaders({
           'Accept': 'application/json',
-          'Content-Type': 'Application/json'
+          'Content-Type': 'application/json'
+        })
+      })
+      .subscribe(
+        response => {
+          console.log('res', response);
+          resolve(response);
+        },
+        error => {
+          console.log('err', error);
+          reject(error);
+        }
+      );
+    });
+  }
+
+  private psot_verify(url, payload, token): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(url, payload, {
+        observe: 'response',
+        headers: new HttpHeaders({
+          'Accept': 'application/json',
+          'Content-Type': 'Application/json',
+          'Authorization': 'Bearer ' + token
         })
       })
       .subscribe(
